@@ -1,0 +1,55 @@
+{
+    "options": {
+        "start": "incoming"
+    },
+    "workflow": {
+        "steps": [
+            {
+                "id": "incoming",
+                "state": {
+                    "data": {
+                        "message": {
+                            "chat": {
+                                "first_name": "mtuchi",
+                                "id": 399994122,
+                                "type": "private",
+                                "username": "mtuchi"
+                            },
+                            "date": 1721410062,
+                            "from": {
+                                "first_name": "mtuchi",
+                                "id": 399994122,
+                                "is_bot": false,
+                                "language_code": "en",
+                                "username": "mtuchi"
+                            },
+                            "message_id": 2,
+                            "text": "Hello"
+                        },
+                        "update_id": 232902721
+                    },
+                    "request": {
+                        "headers": {
+                            "accept-encoding": "gzip, deflate",
+                            "content-length": "269",
+                            "content-type": "application/json",
+                            "host": "app.openfn.org",
+                            "via": "1.1 google",
+                            "x-cloud-trace-context": "ce3b69bf8f074210b1659996c002e4c0/5087666015426673715",
+                            "x-forwarded-for": "91.108.6.65,34.36.242.233",
+                            "x-forwarded-proto": "https"
+                        },
+                        "method": "POST",
+                        "path": [
+                            "i",
+                            "4d1a288d-dcde-476f-9599-cc8c53d4dd22"
+                        ],
+                        "query_params": {}
+                    }
+                },
+                "expression": "gemini.js",
+                "configuration": "tmp/gemini-creds.json"
+            }
+        ]
+    }
+}
