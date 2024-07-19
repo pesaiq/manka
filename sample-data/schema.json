@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "amount": {
+            "type": "number",
+            "minimum": 0.01,
+            "description": "The amount of the expense (positive number)"
+        },
+        "date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date of the expense (YYYY-MM-DD format)"
+        },
+        "category": {
+            "type": "string",
+            "description": "The category of the expense (e.g., Groceries, Rent)"
+        },
+        "description": {
+            "type": "string",
+            "description": "Optional description of the expense"
+        },
+        "payment_method": {
+            "type": "string",
+            "enum": [
+                "Cash",
+                "Bank Card",
+                "Mobile Money",
+                "Other"
+            ],
+            "description": "Optional payment method for the expense"
+        }
+    },
+    "required": [
+        "amount",
+        "date",
+        "category"
+    ]
+}

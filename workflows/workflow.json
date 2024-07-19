@@ -1,11 +1,14 @@
 {
     "options": {
-        "start": "incoming"
+        "start": "say-hi"
     },
     "workflow": {
         "steps": [
             {
-                "id": "incoming",
+                "id": "say-hi",
+                "adaptor": "http",
+                "expression": "say-hi.js",
+                "configuration": "tmp/telegram.json",
                 "state": {
                     "data": {
                         "message": {
@@ -24,7 +27,7 @@
                                 "username": "mtuchi"
                             },
                             "message_id": 2,
-                            "text": "Hello"
+                            "text": "BGI0DWF32UU Confirmed. Tsh500.00 sent to MALIPO YA SERIKALI for account 998609060907 on 18/7/24 at 10:40 AM Total fee Tsh10.00 (M-Pesa fee Tsh10.00 + Government Levy Tsh0.00). Balance is Tsh21,327.50."
                         },
                         "update_id": 232902721
                     },
@@ -47,8 +50,40 @@
                         "query_params": {}
                     }
                 },
+                "next": {
+                    "gemini": "!state.errors"
+                }
+            },
+            {
+                "id": "gemini",
+                "adaptor": "http",
                 "expression": "gemini.js",
-                "configuration": "tmp/gemini-creds.json"
+                "configuration": "tmp/gemini.json",
+                "next": {
+                    "feedback": "!state.errors",
+                    "sheets": "state.errors"
+                }
+            },
+            {
+                "id": "sheets",
+                "adaptor": "googlesheets",
+                "expression": "sheets.js",
+                "configuration": "tmp/sheets.json",
+                "next": {
+                    "goodbye": "!state.errors"
+                }
+            },
+            {
+                "id": "feedback",
+                "adaptor": "http",
+                "expression": "feedback.js",
+                "configuration": "tmp/telegram.json"
+            },
+            {
+                "id": "goodbye",
+                "adaptor": "http",
+                "expression": "goodbye.js",
+                "configuration": "tmp/telegram.json"
             }
         ]
     }
