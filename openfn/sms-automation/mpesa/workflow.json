@@ -1,0 +1,36 @@
+{
+    "start": "getTypeAndLang",
+    "jobs": [
+        {
+            "id": "getTypeAndLang",
+            "adaptor": "common",
+            "expression": "1-getTypeAndLang.js",
+            "state": {
+                "data": {
+                    "from": "M-PESA",
+                    "receivedStamp": 1690304269899,
+                    "sentStamp": 1690304261000,
+                    "sim": "sim1",
+                    "text": "AGO2A7S9684 Confirmed.You have received Tsh3,000.00 from 255757177811 - JOHN POMBE MAGUFULI  on 24/7/23 at 10:37 AM New M-Pesa balance is Tsh3,118.00."
+                }
+            },
+            "next": {
+                "parseSms": "!state.error"
+            }
+        },
+        {
+            "id": "parseSms",
+            "adaptor": "common",
+            "expression": "2-parseSms.js",
+            "next": {
+                "loadToKarani": "!state.error"
+            }
+        },
+        {
+            "id": "loadToKarani",
+            "adaptor": "postgresql",
+            "configuration": "tmp/db-creds.json",
+            "expression": "3-loadToKarani.js"
+        }
+    ]
+}
